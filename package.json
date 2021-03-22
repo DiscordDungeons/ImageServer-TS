@@ -1,0 +1,36 @@
+{
+  "name": "ImageServer-TS",
+  "version": "1.0.0",
+  "description": "Package for interacting with ImageServer, written in TypeScript",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "prepublish": "npm run tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DiscordDungeons/ImageServer-TS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "EUPL-1.2-or-later",
+  "bugs": {
+    "url": "https://github.com/DiscordDungeons/ImageServer-TS/issues"
+  },
+  "homepage": "https://github.com/DiscordDungeons/ImageServer-TS#readme",
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.8",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "eslint": "^7.22.0",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
