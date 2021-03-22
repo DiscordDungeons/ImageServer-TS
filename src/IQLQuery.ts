@@ -21,6 +21,9 @@ export type IQLQueryData = {
 class IQLQuery {
 	query: IQLQueryData
 	
+	/**
+	 * Constructs a new IQLQuery
+	 */
 	constructor () {
 		this.query = {
 			Init: { Actions: [] },
@@ -29,6 +32,12 @@ class IQLQuery {
 		}
 	}
 
+	/**
+	 * Adds an instruction to load an image to the query
+	 * @param url The link to the image to load
+	 * @param name The name the loaded image will have
+	 * @returns The new IQLQuery
+	 */
 	loadImage(url: string, name: string): IQLQuery {
 		this.query.Init.Actions.push({
 			ActionType: 'LOAD_IMAGE',
@@ -39,6 +48,13 @@ class IQLQuery {
 		return this
 	}
 
+	/**
+	 * Adds an instruction to load a spritesheet to the query
+	 * @param url The URL to the image to load
+	 * @param name The name the loaded sprites will be prefixed with
+	 * @param spriteSize The size that one sprite is, defined as [width, height]
+	 * @returns The new IQLQuery
+	 */
 	loadSprites(url: string, name: string, spriteSize: Array<number>): IQLQuery {
 		this.query.Init.Actions.push({
 			ActionType: 'LOAD_SPRITES',
@@ -52,6 +68,12 @@ class IQLQuery {
 		return this
 	}
 
+	/**
+	 * Adds an instruction to create a new image
+	 * @param imageName The name of the new image
+	 * @param imageSize The size the new image will have, defined as [width, height]
+	 * @returns The new IQLQuery
+	 */
 	newImage(imageName: string, imageSize: Array<number>): IQLQuery {
 		this.query.Generate.Actions.push({
 			ActionType: 'NEW_IMAGE',
@@ -63,7 +85,13 @@ class IQLQuery {
 		return this
 	}
 
-	grayScale(imageName: string, includeTransparency: boolean): IQLQuery {
+	/**
+	 * Adds an instruction to make an image grayscale
+	 * @param imageName The image to make gray
+	 * @param includeTransparency If the grayscale should include transparency
+	 * @returns The new IQLQuery
+	 */
+	grayScale(imageName: string, includeTransparency = false): IQLQuery {
 		let grayscaleValue: any = true
 
 		if (includeTransparency) {
@@ -84,11 +112,11 @@ class IQLQuery {
 
 
 	/**
-	 * Pastes an image atop another.
+	 * Adds an instruction to pastes an image on top of another.
 	 * @param imageName The image to paste on
 	 * @param pasteImageName The image to be pasted
-	 * @param pasteAt Where to paste the image
-	 * @returns IQLQuery
+	 * @param pasteAt Where to paste the image, defined as [x, y]
+	 * @returns The new IQLQuery
 	 */
 	pasteImage(imageName: string, pasteImageName: string, pasteAt: Array<number>): IQLQuery {
 		this.query.Generate.Actions.push({
@@ -105,6 +133,11 @@ class IQLQuery {
 		return this
 	}
 
+	/**
+	 * Adds an instruction to invert an image
+	 * @param imageName The name of the image to invert
+	 * @returns The new IQLQuery
+	 */
 	invert(imageName: string): IQLQuery {
 		this.query.Generate.Actions.push({
 			ActionType: 'MODIFY_IMAGE',
@@ -117,6 +150,11 @@ class IQLQuery {
 		return this
 	}
 
+	/**
+	 * Adds an instruction to return an image
+	 * @param imageName The name of the image to return
+	 * @returns The new IQLQuery
+	 */
 	returnImage (imageName: string): IQLQuery {
 		this.query.Return.Actions.push({
 			ActionType: 'RETURN_IMAGE',
