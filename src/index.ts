@@ -1,2 +1,8 @@
-export * as IQLClient from "./IQLClient"
-export * as IQLQuery from "./IQLQuery"
+import IQLClient from "./IQLClient"
+import IQLQuery from "./IQLQuery"
+
+export {
+	IQLClient,
+	IQLQuery,
+}
+
