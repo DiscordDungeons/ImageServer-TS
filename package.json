@@ -7,6 +7,7 @@
   "files": [
     "lib/"
   ],
+  "types": "lib/cjs/index.d.ts",
   "scripts": {
     "test": "jest",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
