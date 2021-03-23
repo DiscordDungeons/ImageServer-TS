@@ -1,5 +1,5 @@
 {
-  "name": "ImageServer-TS",
+  "name": "@discorddungeons/iqlclient",
   "version": "1.0.0",
   "description": "Package for interacting with ImageServer, written in TypeScript",
   "main": "./lib/cjs/index.js",
