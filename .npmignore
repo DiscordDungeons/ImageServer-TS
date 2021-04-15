@@ -1,0 +1,20 @@
+# Packages
+node_modules/
+yarn.lock
+package-lock.json
+
+# Configs and Ignores
+.editorconfig
+.eslintrc
+.gitattributes
+.gitignore
+
+# Misc
+test/
+jest.config.js
+.tmp/
+.vscode/
+.github/
+.dependabot/
+tsconfig.json
+tsconfig-cjs.json
