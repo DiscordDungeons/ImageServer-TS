@@ -38,5 +38,14 @@
 		"@typescript-eslint/restrict-template-expressions": ["error", {
 			"allowAny": true
 		}]
-	}
+	},
+  "overrides": [
+    {
+      "files": ["src/**/*.test.ts"],
+      "globals": {
+        "test": true,
+        "expect": true
+      }
+    }
+  ]
 }
