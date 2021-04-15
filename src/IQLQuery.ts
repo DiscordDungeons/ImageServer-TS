@@ -154,6 +154,10 @@ class IQLQuery {
 
 		return this
 	}
+
+	toJSON(): IQLQueryData {
+		return this.query
+	}
 }
 
 export default IQLQuery
