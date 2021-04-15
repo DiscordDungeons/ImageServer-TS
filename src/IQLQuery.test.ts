@@ -102,4 +102,3 @@ test('Return image instruction gets added correctly', () => {
 	expect(action.ActionType).toBe('RETURN_IMAGE')
 	expect(action.ImageName).toBe('image')
 })
-

@@ -7,4 +7,3 @@ export {
 	IQLClient,
 	IQLQuery,
 }
-

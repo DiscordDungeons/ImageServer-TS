@@ -2,7 +2,7 @@ import { IQLQueryData } from "./types"
 
 class IQLQuery {
 	query: IQLQueryData
-	
+
 	/**
 	 * Constructs a new IQLQuery
 	 * @param query The query to start with
