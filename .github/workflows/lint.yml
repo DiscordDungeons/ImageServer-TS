@@ -1,0 +1,31 @@
+name: ESLint
+on:
+  push:
+    branches:
+      - "*"
+      - "!docs"
+    paths:
+      - "src/**"
+      - ".eslintrc"
+      - ".github/workflows/lint.yml"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Lint source code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Node v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npm run lint

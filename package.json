@@ -10,6 +10,8 @@
   "types": "lib/cjs/index.d.ts",
   "scripts": {
     "test": "jest",
+    "lint": "npx eslint --ext .ts ./src",
+    "lint:fix": "npx eslint --ext .ts ./src --fix",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "prepublish": "npm run tsc"
   },
