@@ -1,31 +1,14 @@
-export type IQLAction = {
-	ActionType: string,
-	Url?: string,
-	ImageName: string,
-	Properties?: Record<string, any>,
-}
-
-export type IQLQueryData = {
-	Init: {
-		Actions: Array<IQLAction>,
-	},
-	Generate: {
-		Actions: Array<IQLAction>,
-	},
-	Return: {
-		Actions: Array<IQLAction>,
-	},
-}
-
+import { IQLQueryData } from "./types"
 
 class IQLQuery {
 	query: IQLQueryData
 	
 	/**
 	 * Constructs a new IQLQuery
+	 * @param query The query to start with
 	 */
-	constructor () {
-		this.query = {
+	constructor (query?: IQLQueryData) {
+		this.query = query || {
 			Init: { Actions: [] },
 			Generate: { Actions: [] },
 			Return: { Actions: [] },
@@ -33,12 +16,20 @@ class IQLQuery {
 	}
 
 	/**
+	 * Clones the existing query into a new IQLQuery
+	 * @returns The new IQLQuery
+	 */
+	clone(): IQLQuery {
+		return new IQLQuery(this.query)
+	}
+
+	/**
 	 * Adds an instruction to load an image to the query
 	 * @param url The link to the image to load
 	 * @param name The name the loaded image will have
-	 * @returns The new IQLQuery
+	 * @returns The IQLQuery
 	 */
-	loadImage(url: string, name: string): IQLQuery {
+	loadImage(url: string, name: string): this {
 		this.query.Init.Actions.push({
 			ActionType: 'LOAD_IMAGE',
 			Url: url,
@@ -53,9 +44,9 @@ class IQLQuery {
 	 * @param url The URL to the image to load
 	 * @param name The name the loaded sprites will be prefixed with
 	 * @param spriteSize The size that one sprite is, defined as [width, height]
-	 * @returns The new IQLQuery
+	 * @returns The IQLQuery
 	 */
-	loadSprites(url: string, name: string, spriteSize: Array<number>): IQLQuery {
+	loadSprites(url: string, name: string, spriteSize: [number, number]): this {
 		this.query.Init.Actions.push({
 			ActionType: 'LOAD_SPRITES',
 			Url: url,
@@ -72,9 +63,9 @@ class IQLQuery {
 	 * Adds an instruction to create a new image
 	 * @param imageName The name of the new image
 	 * @param imageSize The size the new image will have, defined as [width, height]
-	 * @returns The new IQLQuery
+	 * @returns The IQLQuery
 	 */
-	newImage(imageName: string, imageSize: Array<number>): IQLQuery {
+	newImage(imageName: string, imageSize: [number, number]): this {
 		this.query.Generate.Actions.push({
 			ActionType: 'NEW_IMAGE',
 			ImageName: imageName,
@@ -89,9 +80,9 @@ class IQLQuery {
 	 * Adds an instruction to make an image grayscale
 	 * @param imageName The image to make gray
 	 * @param includeTransparency If the grayscale should include transparency
-	 * @returns The new IQLQuery
+	 * @returns The IQLQuery
 	 */
-	grayScale(imageName: string, includeTransparency = false): IQLQuery {
+	grayScale(imageName: string, includeTransparency = false): this {
 		let grayscaleValue: any = true
 
 		if (includeTransparency) {
@@ -116,9 +107,9 @@ class IQLQuery {
 	 * @param imageName The image to paste on
 	 * @param pasteImageName The image to be pasted
 	 * @param pasteAt Where to paste the image, defined as [x, y]
-	 * @returns The new IQLQuery
+	 * @returns The IQLQuery
 	 */
-	pasteImage(imageName: string, pasteImageName: string, pasteAt: Array<number>): IQLQuery {
+	pasteImage(imageName: string, pasteImageName: string, pasteAt: [number, number]): this {
 		this.query.Generate.Actions.push({
 			ActionType: 'MODIFY_IMAGE',
 			ImageName: imageName,
@@ -136,9 +127,9 @@ class IQLQuery {
 	/**
 	 * Adds an instruction to invert an image
 	 * @param imageName The name of the image to invert
-	 * @returns The new IQLQuery
+	 * @returns The IQLQuery
 	 */
-	invert(imageName: string): IQLQuery {
+	invert(imageName: string): this {
 		this.query.Generate.Actions.push({
 			ActionType: 'MODIFY_IMAGE',
 			ImageName: imageName,
@@ -153,9 +144,9 @@ class IQLQuery {
 	/**
 	 * Adds an instruction to return an image
 	 * @param imageName The name of the image to return
-	 * @returns The new IQLQuery
+	 * @returns The IQLQuery
 	 */
-	returnImage (imageName: string): IQLQuery {
+	returnImage(imageName: string): this {
 		this.query.Return.Actions.push({
 			ActionType: 'RETURN_IMAGE',
 			ImageName: imageName,

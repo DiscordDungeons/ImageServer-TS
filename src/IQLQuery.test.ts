@@ -1,4 +1,5 @@
 import { IQLQuery } from "."
+import { LoadSpritesAction, ModifyImageAction, NewImageAction, ReturnImageAction } from "./types"
 
 test('Load image instruction gets added correctly', () => {
 	const query = new IQLQuery()
@@ -15,10 +16,12 @@ test('Load sprites instruction gets added correctly', () => {
 
 	query.loadSprites('https://example.com/image.png', 'image', [ 16, 16 ])
 
-	expect(query.query.Init.Actions[0].ActionType).toBe('LOAD_SPRITES')
-	expect(query.query.Init.Actions[0].ImageName).toBe('image')
-	expect(query.query.Init.Actions[0].Url).toBe('https://example.com/image.png')
-	expect(query.query.Init.Actions[0].Properties?.SpriteSize).toMatchObject([ 16, 16 ])
+	const action = query.query.Init.Actions[0] as LoadSpritesAction
+
+	expect(action.ActionType).toBe('LOAD_SPRITES')
+	expect(action.ImageName).toBe('image')
+	expect(action.Url).toBe('https://example.com/image.png')
+	expect(action.Properties.SpriteSize).toMatchObject([ 16, 16 ])
 })
 
 test('New image instruction gets added correctly', () => {
@@ -26,9 +29,11 @@ test('New image instruction gets added correctly', () => {
 
 	query.newImage('newImage', [ 16, 16 ])
 
-	expect(query.query.Generate.Actions[0].ActionType).toBe('NEW_IMAGE')
-	expect(query.query.Generate.Actions[0].ImageName).toBe('newImage')
-	expect(query.query.Generate.Actions[0].Properties?.Size).toMatchObject([ 16, 16 ])
+	const action = query.query.Generate.Actions[0] as NewImageAction
+
+	expect(action.ActionType).toBe('NEW_IMAGE')
+	expect(action.ImageName).toBe('newImage')
+	expect(action.Properties.Size).toMatchObject([ 16, 16 ])
 })
 
 test('Grayscale instruction gets added correctly', () => {
@@ -36,9 +41,11 @@ test('Grayscale instruction gets added correctly', () => {
 
 	query.grayScale('image')
 
-	expect(query.query.Generate.Actions[0].ActionType).toBe('MODIFY_IMAGE')
-	expect(query.query.Generate.Actions[0].ImageName).toBe('image')
-	expect(query.query.Generate.Actions[0].Properties?.Grayscale).toBe(true)
+	const action = query.query.Generate.Actions[0] as ModifyImageAction
+
+	expect(action.ActionType).toBe('MODIFY_IMAGE')
+	expect(action.ImageName).toBe('image')
+	expect(action.Properties.Grayscale).toBe(true)
 })
 
 
@@ -47,9 +54,11 @@ test('Grayscale instruction with transparency gets added correctly', () => {
 
 	query.grayScale('image', true)
 
-	expect(query.query.Generate.Actions[0].ActionType).toBe('MODIFY_IMAGE')
-	expect(query.query.Generate.Actions[0].ImageName).toBe('image')
-	expect(query.query.Generate.Actions[0].Properties?.Grayscale).toMatchObject({
+	const action = query.query.Generate.Actions[0] as ModifyImageAction
+
+	expect(action.ActionType).toBe('MODIFY_IMAGE')
+	expect(action.ImageName).toBe('image')
+	expect(action.Properties.Grayscale).toMatchObject({
 		IncludeTransparency: true,
 	})
 })
@@ -60,9 +69,11 @@ test('Paste image instruction gets added correctly', () => {
 
 	query.pasteImage('image', 'image2', [ 0, 10 ])
 
-	expect(query.query.Generate.Actions[0].ActionType).toBe('MODIFY_IMAGE')
-	expect(query.query.Generate.Actions[0].ImageName).toBe('image')
-	expect(query.query.Generate.Actions[0].Properties?.PasteImage).toMatchObject({
+	const action = query.query.Generate.Actions[0] as ModifyImageAction
+
+	expect(action.ActionType).toBe('MODIFY_IMAGE')
+	expect(action.ImageName).toBe('image')
+	expect(action.Properties.PasteImage).toMatchObject({
 		ImageName: 'image2',
 		PasteAt: [ 0, 10 ],
 	})
@@ -73,9 +84,11 @@ test('Invert image instruction gets added correctly', () => {
 
 	query.invert('image')
 
-	expect(query.query.Generate.Actions[0].ActionType).toBe('MODIFY_IMAGE')
-	expect(query.query.Generate.Actions[0].ImageName).toBe('image')
-	expect(query.query.Generate.Actions[0].Properties?.Invert).toBe(true)
+	const action = query.query.Generate.Actions[0] as ModifyImageAction
+
+	expect(action.ActionType).toBe('MODIFY_IMAGE')
+	expect(action.ImageName).toBe('image')
+	expect(action.Properties.Invert).toBe(true)
 })
 
 
@@ -84,7 +97,9 @@ test('Return image instruction gets added correctly', () => {
 
 	query.returnImage('image')
 
-	expect(query.query.Return.Actions[0].ActionType).toBe('RETURN_IMAGE')
-	expect(query.query.Return.Actions[0].ImageName).toBe('image')
+	const action = query.query.Return.Actions[0] as ReturnImageAction
+
+	expect(action.ActionType).toBe('RETURN_IMAGE')
+	expect(action.ImageName).toBe('image')
 })
 
