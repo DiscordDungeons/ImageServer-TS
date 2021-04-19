@@ -1,6 +1,6 @@
 {
   "name": "@discorddungeons/iqlclient",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package for interacting with ImageServer, written in TypeScript",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
