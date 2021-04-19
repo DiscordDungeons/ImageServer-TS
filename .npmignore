@@ -18,3 +18,5 @@ jest.config.js
 .dependabot/
 tsconfig.json
 tsconfig-cjs.json
+*.test.js
+*.test.d.ts
