@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/DiscordDungeons/ImageServer-TS#readme",
   "devDependencies": {
-    "@types/jest": "^26.0.21",
+    "@types/jest": "^27.0.1",
     "@types/node-fetch": "^2.5.8",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
